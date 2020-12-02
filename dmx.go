@@ -1,7 +1,6 @@
 package dmx
 
 import (
-	"fmt"
 	"io"
 	"log"
 	"time"
@@ -47,7 +46,7 @@ func NewDMXConnection(device string) (dmx *DMX, err error) {
 	return dmx, nil
 }
 
-// SetChannel -
+// SetAddress -
 func (dmx *DMX) SetAddress(address int, value byte) error {
 	checkAdress(address)
 	dmx.frame[address] = value
@@ -77,6 +76,6 @@ func (dmx *DMX) Close() error {
 
 func checkAdress(id int) {
 	if (id > 512) || (id < 1) {
-		panic(fmt.Sprintf("Channel format error: %d", id))
+		log.Fatalln("Channel format error: ", id)
 	}
 }
